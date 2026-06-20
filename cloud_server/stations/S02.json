@@ -1,0 +1,29 @@
+{
+  "_说明": "演示水槽·下游站(执行闭环控制对象)。1:2缩比水尺：尺面印刷读数即真实读数(印刷50cm段=物理25cm)。y_px为整幅相机画面坐标(非ROI)。装机后拍全幅标定照,人工读两条刻度线像素行填入two_point。",
+  "station_id": "S02",
+  "name": "演示水槽-下游站",
+  "calib": {
+    "_模式说明": "two_point=两点标定(推荐) / anchor_scale=锚点+尺度(cm_per_px留空则用E刻度自动值)",
+    "mode": "two_point",
+    "two_point": {
+      "_填法": "⚠️占位值,装机后必须实测更新。读数用尺面印刷刻度(即1:2叙事下的'真实读数')。",
+      "p1": { "y_px": 200, "reading_cm": 40.0 },
+      "p2": { "y_px": 700, "reading_cm": 10.0 }
+    },
+    "anchor": { "y_px": 200, "reading_cm": 40.0 },
+    "cm_per_px": null
+  },
+  "install": {
+    "location": "演示水槽下游段(矮坝右侧)",
+    "lat": null,
+    "lon": null,
+    "installed_at": null,
+    "camera": "MaixCam2 8MP 一机双站(画面右半)",
+    "note": "装机流程：①水尺贴前壁内侧刚性固定 ②摄像头立杆50~60cm正对锁定 ③拍全幅标定照 ④更新本文件两点读数 ⑤跑eval回归确认误差"
+  },
+  "alarm": {
+    "_说明": "阈值按印刷读数口径。danger即排涝泵开泵线(PumpController.on_cm),回落关泵线=danger-3(off_cm),warn为趋势预测目标线。注水排练后按矮坝/蓄水库实际几何微调。",
+    "warn_cm": 24.0,
+    "danger_cm": 32.0
+  }
+}

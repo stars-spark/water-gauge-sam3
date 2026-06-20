@@ -1,0 +1,29 @@
+{
+  "_说明": "站点标定配置模板。安装时填一次，长期有效。y_px 均为整幅相机画面坐标(非ROI)。",
+  "station_id": "S01",
+  "name": "演示水槽-上游站(原实验室1米打印尺,水槽装机后重标)",
+  "_水槽重标提醒": "⚠️当前两点值是实验室1米打印尺的旧标定。水槽装机后：水尺换1:2缩比尺(印刷读数即真实读数)、重拍全幅标定照、重填two_point两点,并把alarm改为与S02同口径(上游站一般只设warn用于趋势叙事)。",
+  "calib": {
+    "_模式说明": "two_point=两点标定(推荐) / anchor_scale=锚点+尺度(cm_per_px留空则用E刻度自动值)",
+    "mode": "two_point",
+    "two_point": {
+      "_填法": "装机后拍一张全幅照,人工读出两条已知刻度线的像素行。两点离得越远越准。",
+      "p1": { "y_px": 312,  "reading_cm": 80.0 },
+      "p2": { "y_px": 1156, "reading_cm": 30.0 }
+    },
+    "anchor": { "y_px": 312, "reading_cm": 80.0 },
+    "cm_per_px": null
+  },
+  "install": {
+    "location": "实验室测试",
+    "lat": null,
+    "lon": null,
+    "installed_at": "2026-06-11",
+    "camera": "MaixCam2 8MP",
+    "note": "正式外场安装后：①刚性固定 ②拍全幅标定照 ③更新本文件两点读数"
+  },
+  "alarm": {
+    "warn_cm": 70.0,
+    "danger_cm": 85.0
+  }
+}

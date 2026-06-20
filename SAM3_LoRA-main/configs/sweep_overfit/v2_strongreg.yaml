@@ -1,0 +1,63 @@
+# [#2 过拟合扫描] V2 = 强正则、容量不变。测'正则 vs 降容量'谁更治过拟合。
+# 相对 V0：dropout 0.25→0.35、weight_decay 0.1→0.2、LR 3e-5→2e-5。rank 仍 8。
+model:
+  name: "facebook/sam3"
+  cache_dir: null
+
+lora:
+  rank: 8
+  alpha: 16
+  dropout: 0.35
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "out_proj"
+    - "qkv"
+    - "proj"
+  apply_to_vision_encoder: false
+  apply_to_text_encoder: false
+  apply_to_geometry_encoder: false
+  apply_to_detr_encoder: false
+  apply_to_detr_decoder: true
+  apply_to_mask_decoder: true
+
+training:
+  data_dir: "/media/jiale/AI_Local/水尺水位测量系统/02_数据集/waterline_v1_coco"
+  batch_size: 4
+  gradient_checkpointing: true
+  num_workers: 8
+  learning_rate: 2e-5
+  weight_decay: 0.2
+  adam_beta1: 0.9
+  adam_beta2: 0.999
+  adam_epsilon: 1e-8
+  max_grad_norm: 1.0
+  num_epochs: 15          # 过拟合在 epoch3-4，15 足够看清 px 曲线拐点，省 GPU
+  warmup_steps: 60
+  lr_scheduler: "cosine"
+  logging_steps: 5
+  eval_steps: 30
+  save_steps: 30
+  save_total_limit: 3
+  mixed_precision: "bf16"
+  seed: 42
+  gradient_accumulation_steps: 8
+  save_every_epoch: true   # ★ 本次扫描核心开关
+
+output:
+  output_dir: "SAM3_LoRa_Waterline_sweep_v2"
+  logging_dir: "logs"
+  save_lora_only: true
+  push_to_hub: false
+  hub_model_id: null
+
+evaluation:
+  metric: "iou"
+  save_predictions: true
+  compute_metrics_during_training: true
+
+hardware:
+  device: "cuda"
+  dataloader_pin_memory: true
+  use_compile: false
