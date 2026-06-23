@@ -12,8 +12,7 @@ build/
 venv/
 env/
 
-# Model weights & checkpoints (tracked in SAM3_LoRA-main/.gitignore too)
-*.pt
+# Model weights & checkpoints — exclude training intermediates
 *.pth
 *.ckpt
 *.bin
@@ -22,6 +21,10 @@ outputs/
 SAM3_LoRa_outputs/
 SAM3_LoRa_water_gauge_outputs/
 SAM3_LoRa_Waterline_outputs/
+sweep_overfit_results/
+# Exclude .pt files everywhere EXCEPT weights/ (LoRA adapters for release)
+*.pt
+!weights/*.pt
 
 # Large result archives
 *.tar.gz
