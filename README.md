@@ -8,6 +8,14 @@
 
 ## 效果展示
 
+### 完整推理流水线（端到端四步）
+
+YOLO 检测水尺 → ROI 裁剪 → SAM3 水尺主体分割 → SAM3 水位线精定位，全程自动运行。
+
+![流水线四步v1](assets/viz_pipeline_full_v1.jpg)
+
+![流水线四步v2](assets/viz_pipeline_full_v2.jpg)
+
 ### 云边协同全链路
 
 边缘端（MaixCam2）完成图像采集 → YOLO-seg ROI 裁剪 → 4G 上传，云端 SAM3 完成精细分割与水位解算。
