@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Model weights & checkpoints (tracked in SAM3_LoRA-main/.gitignore too)
+*.pt
+*.pth
+*.ckpt
+*.bin
+checkpoints/
+outputs/
+SAM3_LoRa_outputs/
+SAM3_LoRa_water_gauge_outputs/
+SAM3_LoRa_Waterline_outputs/
+
+# Large result archives
+*.tar.gz
+*.zip
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+
+# AutoDL platform files
+autodl_training_backup/.autodl/
